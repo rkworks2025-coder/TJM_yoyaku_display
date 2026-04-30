@@ -3,7 +3,7 @@
 // 改修内容: GAS_URLを「予約管理メイン」の新URLに更新
 // ==========================================
 
-const GAS_URL = "https://script.google.com/macros/s/AKfycbwpNRM_753x0gG5sl5_LTwxn5afUUQqezpmPb874-Stsl5aVUJBLTBk70nW5RE_mdU0/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycby_h_EtlHsp2Tx_5RZdaY9RBimo4D6ASJrHLwwo1pOGtrHS0kjJxPGL0jfA9Sd5S8Ts/exec";
 
 let currentArea = '多摩';
 let dataCache = {};
