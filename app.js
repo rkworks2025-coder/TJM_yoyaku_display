@@ -190,6 +190,9 @@ function renderData(data, isCache = false) {
     const totalHours = timelineStr.length / 4; 
     const timelineWidth = totalHours === 144 ? 3200 : 1600;
 
+    // 144hモードは後半テーブルが1時間早く始まるため baseDateを1時間戻して補正
+    if (totalHours === 144) baseDate = new Date(baseDate.getTime() - 60 * 60 * 1000);
+
     let timelineHtml = '<div class="timeline-container">';
     for (let char of timelineStr) {
       const cls = char === '○' ? 'status-ok' : (char === 's' ? 'status-stopped' : 'status-ng');
