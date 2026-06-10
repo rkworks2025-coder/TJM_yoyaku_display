@@ -190,9 +190,6 @@ function renderData(data, isCache = false) {
     const totalHours = timelineStr.length / 4; 
     const timelineWidth = totalHours === 144 ? 3200 : 1600;
 
-    // 144hモードは後半テーブルが1時間早く始まるため baseDateを1時間戻して補正
-    if (totalHours === 144) baseDate = new Date(baseDate.getTime() - 60 * 60 * 1000);
-
     let timelineHtml = '<div class="timeline-container">';
     for (let char of timelineStr) {
       const cls = char === '○' ? 'status-ok' : (char === 's' ? 'status-stopped' : 'status-ng');
@@ -203,7 +200,9 @@ function renderData(data, isCache = false) {
     let labelsHtml = '', gridsHtml = '';
     for (let h = 0; h < totalHours; h++) { 
       const leftPos = (h / totalHours) * 100;
-      const slotDate = new Date(baseDate.getTime() + h * 60 * 60 * 1000);
+      // 144hモード後半(72h以降)は1時間加算して補正
+      const offsetMs = (totalHours === 144 && h >= 72) ? 60 * 60 * 1000 : 0;
+      const slotDate = new Date(baseDate.getTime() + h * 60 * 60 * 1000 + offsetMs);
       const currentHour = slotDate.getHours();
       if (currentHour % 2 === 0) {
         labelsHtml += `<div class="ruler-label" style="left: ${leftPos}%;">${currentHour}</div>`;
