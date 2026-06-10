@@ -200,9 +200,7 @@ function renderData(data, isCache = false) {
     let labelsHtml = '', gridsHtml = '';
     for (let h = 0; h < totalHours; h++) { 
       const leftPos = (h / totalHours) * 100;
-      // 144hモード後半(72h以降)は1時間加算して補正
-      const offsetMs = (totalHours === 144 && h >= 72) ? 60 * 60 * 1000 : 0;
-      const slotDate = new Date(baseDate.getTime() + h * 60 * 60 * 1000 + offsetMs);
+      const slotDate = new Date(baseDate.getTime() + h * 60 * 60 * 1000);
       const currentHour = slotDate.getHours();
       if (currentHour % 2 === 0) {
         labelsHtml += `<div class="ruler-label" style="left: ${leftPos}%;">${currentHour}</div>`;
